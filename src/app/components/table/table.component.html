@@ -1,0 +1,30 @@
+<div class="flex-container">
+   <table class="table table-striped" prevent-linebreak>
+      <thead>
+         <tr>
+            <th *ngFor="let name of columnNames">{{name}}</th>
+            <th *ngIf="columnNames.length">Order</th>
+            <th *ngIf="columnNames.length">
+               <button type="button" class="btn btn-primary btn-add" *ngIf="columnNames.length"
+                  (click)="addRow()">Добавить</button>
+            </th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr *ngFor="let row of tableRows; let i = index">
+            <td *ngFor="let columnName of columnNames" (focusout)="editValue($event, columnName, i)"
+               contenteditable="true">
+               {{row[columnName]}}
+            </td>
+            <td>
+               <button type="button" class="btn btn-primary btn-up"
+                  (click)="moveRow(i, 'up')"><span>&#8593;</span></button>
+               <button type="button" class="btn btn-primary" (click)="moveRow(i, 'down')"><span>&#8595;</span></button>
+            </td>
+            <td>
+               <button type="button" class="btn btn-primary btn-remove" (click)="removeRow(i)">Remove</button>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>

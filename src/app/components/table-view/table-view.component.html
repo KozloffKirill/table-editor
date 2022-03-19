@@ -1,0 +1,13 @@
+<div class="form-group table-data-form w-50">
+   <label for="table-data-input">Данные для таблицы в формате JSON</label>
+   <textarea class="form-control table-data-input" rows="5" id="table-data-input" [(ngModel)]="stringData"></textarea>
+   <div class="flex-container">
+      <button type="button" class="btn btn-primary" (click)="loadTableData()">Загрузить в таблицу</button>
+      <button type="button" class="btn btn-primary" [disabled]="!allowUploading"
+         (click)="uploadTableData()">Выгрузить</button>
+      <input type="file" class="form-control-file" accept=".csv, .JSON" #file (change)="fileChanged($event)">
+      <button type="button" class="btn btn-primary btn-load-file" [disabled]="!allowFileLoading"
+         (click)="loadFromFile()">Загрузить из файла</button>
+   </div>
+</div>
+<app-table></app-table>

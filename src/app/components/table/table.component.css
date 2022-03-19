@@ -1,0 +1,32 @@
+:host {
+   display: inline-block;
+}
+
+.flex-container {
+   display: flex;
+   flex-direction: column;
+   margin: 0 0 0 20px;
+}
+
+.btn-add {
+   background-color: #00c851;
+   border-color: #00c851;
+}
+
+.table td {
+   vertical-align: middle;
+   text-align: center;
+}
+
+.btn-remove {
+   background-color: #ff3547;
+   border-color: #ff3547;
+}
+
+.btn-up {
+   margin-right: 5px;
+}
+
+.btn-download {
+   align-self: flex-start;
+}

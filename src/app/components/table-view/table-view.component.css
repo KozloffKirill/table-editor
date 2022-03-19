@@ -1,0 +1,22 @@
+.table-data-form {
+   margin: 20px 0 20px 20px;
+}
+
+.table-data-input {
+   margin: 0 0 10px 0;
+}
+
+.flex-container {
+   display: flex;
+   flex-wrap: wrap;
+}
+
+.flex-container button:not(:first-child) {
+   margin: 0 0 0 10px;
+}
+
+.form-control-file {
+   width: auto;
+   margin-left: auto;
+   align-self: center;
+}
