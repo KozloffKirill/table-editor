@@ -20,3 +20,17 @@
    margin-left: auto;
    align-self: center;
 }
+
+.disclaimer {
+   display: flex;
+   align-items: center;
+   font-size: 0.85rem;
+   font-weight: bold;
+   color: rgba(0, 0, 0, 0.5);
+}
+
+.disclaimer i {
+   font-size: 1.2rem;
+   color: blue;
+   margin-right: 8px;
+}

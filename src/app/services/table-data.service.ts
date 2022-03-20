@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { DataFormat } from '../components/table-view/table-view.component';
 import { IEditValueArgs, IReorderArgs } from '../components/table/table.component';
-import { CSVHelper } from '../helpers/CSV.helper';
+import { CSVHelper } from '../helpers/csv.helper';
 
 @Injectable({
   providedIn: 'root'
@@ -12,26 +13,64 @@ export class TableDataService {
   private _tableData$ = new BehaviorSubject<any[]>([]);
   private _columnNames: string[] = [];
 
+  /**
+   * Table data property
+   *
+   * @readonly
+   * @memberof TableDataService
+   */
   public get tableData() {
     return this._tableData$.asObservable();
   }
 
+  /**
+   * Creates an instance of TableDataService
+   * 
+   * @memberof TableDataService
+   */
   constructor() { }
 
+  /**
+   * String data property
+   *
+   * @readonly
+   * @memberof TableDataService
+   */
   public get stringData() {
     return this._stringData$.asObservable();
   }
 
+  /**
+   * Set string data
+   *
+   * @param {string} value
+   * @memberof TableDataService
+   */
   public setStringData(value: string) {
     this._stringData$.next(value);
     this._setTableData();
   }
 
-  public updateStringData() {
-    console.log(this._tableData$.getValue());
-    this._stringData$.next(JSON.stringify(this._tableData$.getValue()));
+  /**
+   * Updates string data
+   *
+   * @param {DataFormat} format
+   * @memberof TableDataService
+   */
+  public updateStringData(format: DataFormat) {
+    if (format == 'JSON') {
+      this._stringData$.next(JSON.stringify(this._tableData$.getValue()));
+    } else {
+      this._stringData$.next(CSVHelper.arrayToCSV(this._tableData$.getValue()));
+    }
   }
 
+  /**
+   * Set table data
+   *
+   * @private
+   * @memberof TableDataService
+   */
   private _setTableData() {
     if (this._isJSON(this._stringData$.getValue())) {
       this._tableData$.next(JSON.parse(this._stringData$.getValue()));
@@ -44,6 +83,14 @@ export class TableDataService {
         alert('The input data must be in JSON or CSV format!');
   }
 
+  /**
+   * JSON check
+   *
+   * @private
+   * @param {string} value
+   * @return {*}  {boolean}
+   * @memberof TableDataService
+   */
   private _isJSON(value: string): boolean {
     try {
       JSON.parse(value);
@@ -53,10 +100,22 @@ export class TableDataService {
     return true;
   }
 
+  /**
+   * Set column names
+   *
+   * @private
+   * @memberof TableDataService
+   */
   private _setColumnNames() {
     this._columnNames = Object.keys(this._tableData$.getValue()[0]);
   }
 
+  /**
+   * Loads data from file
+   *
+   * @param {File} file
+   * @memberof TableDataService
+   */
   public loadFromFile(file: File) {
     if (file) {
       const reader = new FileReader();
@@ -70,6 +129,11 @@ export class TableDataService {
     }
   }
 
+  /**
+   * Adds row to dataset
+   *
+   * @memberof TableDataService
+   */
   public addRow() {
     const data = this._tableData$.getValue();
     let obj: any = {};
@@ -79,12 +143,24 @@ export class TableDataService {
     data.push(obj);
   }
 
+  /**
+   * Removes row from dataset
+   *
+   * @param {number} index
+   * @memberof TableDataService
+   */
   public removeRow(index: number) {
     const tableData = this._tableData$.getValue();
     tableData.splice(index, 1);
     this._tableData$.next(tableData);
   }
 
+  /**
+   * Move row in data
+   *
+   * @param {IReorderArgs} param
+   * @memberof TableDataService
+   */
   public moveRow(param: IReorderArgs) {
     let data = this._tableData$.getValue();
     if (param.direction == 'up' && param.index > 0) {
@@ -103,7 +179,7 @@ export class TableDataService {
   }
 
   /**
-   *
+   * Alternative move row in data
    *
    * @param {IReorderArgs} param
    * @memberof TableDataService
@@ -122,6 +198,12 @@ export class TableDataService {
     }
   }
 
+  /**
+   * Updates cell value
+   *
+   * @param {IEditValueArgs} param
+   * @memberof TableDataService
+   */
   public updateCellValue(param: IEditValueArgs) {
     const data = this._tableData$.getValue();
     data[param.index][param.propName] = param.value.trim();

@@ -9,6 +9,11 @@ export class AppComponent {
 
   title = 'tableRedactor';
 
+  /**
+   * Creates an instance of AppComponent
+   * 
+   * @memberof AppComponent
+   */
   constructor() { }
 
 }

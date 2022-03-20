@@ -6,7 +6,7 @@
             <th *ngIf="columnNames.length">Order</th>
             <th *ngIf="columnNames.length">
                <button type="button" class="btn btn-primary btn-add" *ngIf="columnNames.length"
-                  (click)="addRow()">Добавить</button>
+                  (click)="addRow()"><i class="mdi mdi-plus-outline"></i></button>
             </th>
          </tr>
       </thead>
@@ -16,13 +16,13 @@
                contenteditable="true">
                {{row[columnName]}}
             </td>
-            <td>
+            <td class="order">
                <button type="button" class="btn btn-primary btn-up"
-                  (click)="moveRow(i, 'up')"><span>&#8593;</span></button>
-               <button type="button" class="btn btn-primary" (click)="moveRow(i, 'down')"><span>&#8595;</span></button>
+                  (click)="moveRow(i, 'up')"><i class="mdi mdi-arrow-up-bold-outline"></i></button>
+               <button type="button" class="btn btn-primary" (click)="moveRow(i, 'down')"><i class="mdi mdi-arrow-down-bold-outline"></i></button>
             </td>
             <td>
-               <button type="button" class="btn btn-primary btn-remove" (click)="removeRow(i)">Remove</button>
+               <button type="button" class="btn btn-primary btn-remove" (click)="removeRow(i)"><i class="mdi mdi-delete-outline"></i></button>
             </td>
          </tr>
       </tbody>

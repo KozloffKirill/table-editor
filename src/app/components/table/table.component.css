@@ -8,14 +8,19 @@
    margin: 0 0 0 20px;
 }
 
-.btn-add {
-   background-color: #00c851;
-   border-color: #00c851;
-}
-
 .table td {
    vertical-align: middle;
    text-align: center;
+}
+
+.table th {
+   vertical-align: middle;
+   text-align: center;
+}
+
+.btn-add {
+   background-color: #00c851;
+   border-color: #00c851;
 }
 
 .btn-remove {
