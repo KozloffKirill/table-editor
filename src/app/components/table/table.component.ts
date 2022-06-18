@@ -82,6 +82,7 @@ export class TableComponent implements OnInit, OnDestroy {
    */
   ngOnDestroy(): void {
     this._destroy$.next(true);
+    this._destroy$.complete();
   }
 
   /**

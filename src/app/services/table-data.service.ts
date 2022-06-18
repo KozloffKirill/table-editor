@@ -141,6 +141,7 @@ export class TableDataService {
       obj[item] = item;
     });
     data.push(obj);
+    this._tableData$.next(data);
   }
 
   /**
